@@ -1,0 +1,80 @@
+#!/bin/bash
+
+opt=1
+while [ $opt -lt 6 ]
+do
+    echo -e "1. Create \n2. View \n3. Insert \n4. Delete \n5. Modify \n6. Exit"
+    read opt
+    case $opt in
+    1)
+        echo "createRecord()"
+        echo "Enter the file name:"
+        read filename
+        echo -e "Name\tAddress\tMbNumber" >> $filename
+        cont=1
+        while [ $cont -gt 0 ]
+        do
+            echo "Enter Name:"
+            read Name
+            echo "Enter Address:"
+            read Address
+            echo "Enter MbNumber:"
+            read MbNumber
+            echo -e "$Name\t$Address\t$MbNumber" >> $filename
+            echo -e "Do you want to continue? Enter 1 to continue & Enter 0 to stop:"
+            read cont
+        done
+        ;;
+    2)
+        echo "readRecord()"
+        cat $filename
+        ;;
+    3)
+        echo "insertRecord()"
+        echo "Enter the file name:"
+        read filename
+        cont=1
+        while [ $cont -gt 0 ]
+        do
+            echo "Enter Name:"
+            read Name
+            echo "Enter Address:"
+            read Address
+            echo "Enter MbNumber:"
+            read MbNumber
+            echo -e "$Name\t$Address\t$MbNumber" >> $filename
+            echo -e "Do you want to continue? Enter 1 to continue & Enter 0 to stop:"
+            read cont
+        done
+        ;;
+    4)
+        echo "deleteRecord()"
+        echo -e "Delete record\nEnter name or MbNumber to delete:"
+        read pattern
+        temp="tempfile"
+        grep -v "$pattern" $filename > $temp
+        mv $temp $filename
+        ;;
+    5)
+        echo "modifyRecord()"
+        echo -e "Modify record\nEnter name or MbNumber to modify:"
+        read pattern
+        temp="tempfile"
+        grep -v "$pattern" $filename > $temp
+        mv $temp $filename
+        echo "Enter new Name:"
+        read Name
+        echo "Enter new Address:"
+        read Address
+        echo "Enter new MbNumber:"
+        read MbNumber
+        echo -e "$Name\t$Address\t$MbNumber" >> $filename
+        ;;
+    6)
+        exit
+        ;;
+    *)
+        echo "Invalid option. Please try again."
+        ;;
+    esac
+done

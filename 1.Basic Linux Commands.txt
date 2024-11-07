@@ -1,0 +1,45 @@
+1. echo
+The echo command prints text to the terminal.
+Code:
+echo "Hello, World!"
+
+2. ls
+The ls command lists files and directories in the current directory.
+Code:
+ls
+
+3. read
+The read command takes user input and assigns it to a variable.
+Code:
+echo "Enter your name:"
+read name
+echo "Hello, $name!"
+
+4. cat
+The cat command reads and outputs the content of a file.
+Code:
+cat file1.txt
+
+5. touch
+The touch command creates an empty file or updates the timestamp of an existing file.
+Code:
+touch newfile.txt
+ls
+
+6. test
+The test command evaluates expressions, commonly used with conditions in scripts.
+Code:
+test -e file1.txt && echo "file1.txt exists" || echo "file1.txt does not exist"
+
+7. grep
+The grep command searches for a pattern in files.
+Code:
+echo "apple" > fruits.txt
+echo "banana" >> fruits.txt
+grep "apple" fruits.txt
+
+8.sed
+The sed command is used for text processing. Here, we replace "apple" with "orange" in a file.
+Code:
+sed 's/apple/orange/' fruits.txt
+

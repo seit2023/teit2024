@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main() { 
+    int queue[100], queue2[100], q_size, head, seek = 0, temp;
+    float avg;
+
+    printf("%s\n", "-----SSTF Disk Scheduling Algorithm-----");
+
+    printf("%s\n", "Enter the size of the queue"); 
+    scanf("%d", &q_size);
+
+    if (q_size > 100) {
+        printf("Error: Queue size exceeds the maximum allowed size of 100.\n");
+        return 1;
+    }
+
+    printf("%s\n", "Enter queue elements"); 
+    for (int i = 0; i < q_size; i++) { 
+        scanf("%d", &queue[i]);
+    }
+
+    printf("%s\n", "Enter initial head position"); 
+    scanf("%d", &head);
+
+    // Calculate the absolute difference between head and each request
+    for (int i = 0; i < q_size; i++) { 
+        queue2[i] = abs(head - queue[i]);
+    }
+
+    // Sort both the queue and queue2 based on the minimum seek time
+    for (int i = 0; i < q_size; i++) { 
+        for (int j = i + 1; j < q_size; j++) { 
+            if (queue2[i] > queue2[j]) { 
+                temp = queue2[i];
+                queue2[i] = queue2[j];
+                queue2[j] = temp;
+
+                temp = queue[i];
+                queue[i] = queue[j];
+                queue[j] = temp;
+            } 
+        } 
+    }
+
+    // Calculate the total seek time and move head accordingly
+    for (int i = 0; i < q_size; i++) { 
+        seek += abs(head - queue[i]);
+        head = queue[i];
+    }
+    printf("\nTotal seek time is %d\n", seek);
+    avg = seek / (float) q_size;
+    printf("Average seek time is %.2f\n", avg);
+
+    return 0;
+}
